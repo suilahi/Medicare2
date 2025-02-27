@@ -23,13 +23,13 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String role = request.getParameter("role");
 
-        user users = new user( name, password, email, phone, role );
+        user users = new user( name,  email,password, phone, role );
         UserDao userDAO = null;
         userDAO = new UserDao(DatabaseConnection.getConnection());
 
         try {
             userDAO.addUser(users);
-            response.sendRedirect("inscription.jsp");
+            response.sendRedirect("index.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("inscription.jsp");

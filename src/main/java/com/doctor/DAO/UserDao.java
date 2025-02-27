@@ -17,12 +17,12 @@ public class UserDao {
 
 
     public void addUser(user user) throws SQLException {
-        String query = "INSERT INTO users (name, Mot_de_passe, email, phone, role) VALUES ( ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (name,  email,Mot_de_passe, phone, role) VALUES ( ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
-            stmt.setString(2, user.getMot_de_passe());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getMot_de_passe());
             stmt.setString(4, user.getPhone());
             stmt.setString(5, user.getRole());
             stmt.executeUpdate();
@@ -38,8 +38,8 @@ public class UserDao {
             if (rs.next()) {
                 return new user(
                         rs.getString("name"),
-                        rs.getString("Mot_de_passe"),
                         rs.getString("email"),
+                        rs.getString("Mot_de_passe"),
                         rs.getString("phone"),
                         rs.getString("role")
                 );

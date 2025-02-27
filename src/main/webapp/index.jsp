@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 <div class="bg-white p-8 rounded-lg shadow-md w-96">
     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Connexion</h2>
 
-    <form action="/login" method="POST">
+    <form action="login" method="POST">
 
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>

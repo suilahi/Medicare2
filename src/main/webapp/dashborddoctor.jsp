@@ -1,4 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.doctor.Model.user"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+  HttpSession sessionObj = request.getSession(false);
+  user users = (sessionObj != null) ? (user) sessionObj.getAttribute("user") : null;
+
+  if (users == null) {
+    response.sendRedirect("index.jsp");
+    return;
+  }
+%>
 <html>
 <head>
     <title>Doctor</title>
@@ -8,8 +20,6 @@
 <body class="flex flex-col items-center min-h-screen p-6 text-white bg-cover bg-center bg-no-repeat bg-opacity-50"
       style="background-image: url('https://images.pexels.com/photos/6129042/pexels-photo-6129042.jpeg?auto=compress&cs=tinysrgb&h=1080&w=1920');">
 
-<a href="index.jsp" class="fixed top-6 right-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">
-Se deconnecter</a>
 
 <h2>Mes rendez-vous</h2>
 
@@ -80,6 +90,8 @@ Se deconnecter</a>
     </tbody>
   </table>
 </div>
+<a href="logout" class="fixed top-6 right-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">
+Se deconnecter</a>
 
 </body>
 </html>

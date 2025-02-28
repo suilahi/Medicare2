@@ -1,4 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.doctor.Model.user"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+  HttpSession sessionObj = request.getSession(false);
+  user users = (sessionObj != null) ? (user) sessionObj.getAttribute("user") : null;
+
+  if (users == null) {
+    response.sendRedirect("index.jsp");
+    return;
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,19 +65,8 @@
     <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md transition duration-300">Réserver</button>
   </form>
 </div>
+<a href="logout" class="fixed top-6 right-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">
+  Se deconnecter</a>
 
-<div class="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg w-full max-w-md mt-6">
-  <h3 class="text-xl font-semibold mb-4">Consulter mes rendez-vous</h3>
-    <div>
-      <label for="search_username" class="block font-medium">Nom d'utilisateur :</label>
-      <input type="text" id="search_username" name="username" required
-             class="w-full p-2 rounded-md border-none focus:ring-2 focus:ring-blue-300 text-gray-900">
-    </div>
-    <button type="submit"
-            class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-md transition duration-300">
-      Consulter
-    </button>
-  </form>
-</div>
 </body>
 </html>

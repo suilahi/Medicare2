@@ -9,6 +9,7 @@ public class medecin extends user{
     public String getSpecialty() {
         return specialty;
     }
+
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //int id = Integer.parseInt(request.getParameter("id"));
+
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("motdepasse");

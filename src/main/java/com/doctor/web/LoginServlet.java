@@ -18,26 +18,35 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-            Connection connection= DatabaseConnection.getConnection();
-            UserDao userDao = new UserDao(connection);
-             response.sendRedirect("./dashbordpatient.jsp");
+        Connection connection = DatabaseConnection.getConnection();
+        UserDao userDao = new UserDao(connection);
 
-            try {
-                user user = userDao.getUserByEmail(email);
+        try {
+            user user = userDao.getUserByEmail(email);
 
-                if (user != null && user.getMot_de_passe().equals(password)){
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", user);
+            if (user != null && user.getMot_de_passe().equals(password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                session.setAttribute("role", user.getRole());
+
+                if ("patient".equals(user.getRole())) {
                     response.sendRedirect("./dashbordpatient.jsp");
+                } else if ("medecin".equals(user.getRole())) {
+                    response.sendRedirect("./dashborddoctor.jsp");
+                } else {
+                    response.sendRedirect("./index.jsp");
                 }
-
-            }catch (Exception e){
-                e.printStackTrace();
+                return;
+            } else {
                 response.sendRedirect("./index.jsp");
+                return;
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("./index.jsp");
+        }
     }
 }
